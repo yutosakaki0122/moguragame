@@ -5,14 +5,20 @@
 	<meta charset="utf-8">
 	<title>もぐらたたきゲーム</title>
 	<style media="screen">
+		#game {
+			cursor: url(./images/hummer.cur), auto;
+		}
+
 		h1 {
 			text-align: center;
 			margin: auto 0px;
 			background: rgba(140, 248, 155, 0.7);
 		}
+
 		h1>img {
 			width: 320px;
 		}
+
 		body {
 			margin: 0px auto;
 			background-image: url(./images/草-noitem.png);
@@ -21,6 +27,7 @@
 			background-position: center;
 			background-size: cover;
 		}
+
 		.container {
 			width: 520px;
 			height: 160px;
@@ -32,25 +39,35 @@
 			display: -o-flex;
 			display: flex;
 		}
+
 		.container img {
 			margin: 20px;
 			width: 140px;
 		}
+
 		.wrapper {
 			margin: 0px auto;
 			display: flex;
 		}
+
 		img {
 			width: 213px;
 		}
+
+		.hit-mogura {
+			cursor: url(./images/hummer2.cur), auto;
+		}
+
 		.uwagaki {
 			position: absolute;
 			top: 0;
 			left: 0;
 		}
+
 		.relative {
 			position: relative;
 		}
+
 		.field {
 			margin: 40px;
 		}
@@ -58,7 +75,7 @@
 
 </head>
 
-<body>
+<body id="game">
 	<div class="field">
 		<h1><img src="images/title.png" alt=""></h1>
 		<div class="container">
@@ -104,6 +121,7 @@
 			</div>
 		</div>
 	</div>
+
 	<script>
 		// ここにJavaScriptを書く
 	</script>
