@@ -81,49 +81,109 @@
 		<div class="container">
 			<div class="relative">
 				<img class="ana" src="images/穴.png">
-				<img class="mogura uwagaki" src="images/モグ2.png">
+				<img class="mogura uwagaki" onclick="hitmogura()" src="">
 			</div>
 			<div class="relative">
 				<img class="ana" src="images/穴.png">
-				<img class="mogura uwagaki" src="images/モグ2.png">
+				<img class="mogura uwagaki"  src="">
 			</div>
 			<div class="relative">
 				<img class="ana" src="images/穴.png">
-				<img class="mogura uwagaki" src="images/モグ2.png">
-			</div>
-		</div>
-		<div class="container">
-			<div class="relative">
-				<img class="ana" src="images/穴.png">
-				<img class="mogura uwagaki" src="images/モグ2.png">
-			</div>
-			<div class="relative">
-				<img class="ana" src="images/穴.png">
-				<img class="mogura uwagaki" src="images/モグ2.png">
-			</div>
-			<div class="relative">
-				<img class="ana" src="images/穴.png">
-				<img class="mogura uwagaki" src="images/モグ2.png">
+				<img class="mogura uwagaki"  src="">
 			</div>
 		</div>
 		<div class="container">
 			<div class="relative">
 				<img class="ana" src="images/穴.png">
-				<img class="mogura uwagaki" src="images/モグ2.png">
+				<img class="mogura uwagaki" src="">
 			</div>
 			<div class="relative">
 				<img class="ana" src="images/穴.png">
-				<img class="mogura uwagaki" src="images/モグ2.png">
+				<img class="mogura uwagaki"  src="">
 			</div>
 			<div class="relative">
 				<img class="ana" src="images/穴.png">
-				<img class="mogura uwagaki" src="images/モグ2.png">
+				<img class="mogura uwagaki"  src="">
+			</div>
+		</div>
+		<div class="container">
+			<div class="relative">
+				<img class="ana" src="images/穴.png">
+				<img class="mogura uwagaki"  src="">
+			</div>
+			<div class="relative">
+				<img class="ana" src="images/穴.png">
+				<img class="mogura uwagaki"  src="">
+			</div>
+			<div class="relative">
+				<img class="ana" src="images/穴.png">
+				<img class="mogura uwagaki"  src="">
+
+				<div class="start">
+					<button onclick="gamestart()"> Game Start </button>
+				</div>
 			</div>
 		</div>
 	</div>
 
 	<script>
+
+
+		
+		//すべてのもぐらにクリックイベントを登録
+		var moguras = document.querySelectorAll(".mogura");
+		let count = 0;
+		for(let index=0;index < moguras.length;index++){
+			const element = moguras[index];
+			element.onclick = hitmogura;
+
+
+		}
+		
+
 		// ここにJavaScriptを書く
+		function hitmogura(){
+			 var mogura = event.target;
+			console.log('たたいたよ');
+			mogura.src="images/モグ1.png";
+			setTimeout(modoru,300, mogura)
+			count++;
+		}
+
+		function modoru(mogura){
+			mogura.src="images/モグ2.png";
+			setTimeout(kakurerumogura,1000,mogura);
+		}
+
+		
+		function gamestart(){
+			let time;
+			time = setInterval(derumogura, 1000);
+			setTimeout(clearInterval,3000,time);
+			setTimeout(owari,3000);
+
+		}
+
+
+		function derumogura(){
+			let rnd = Math.floor(Math.random() * 9);
+			modoru(moguras[rnd]);
+
+		}
+
+		function kakurerumogura(mogura){
+			mogura.src="";
+		}
+
+		function owari(){
+
+			alert("ゲーム終了！\n"+count+"回たたきました");
+			//clearInterval(derumogura)
+			count=0;
+		}
+
+
+
 	</script>
 </body>
 
