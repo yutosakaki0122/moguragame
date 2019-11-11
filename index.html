@@ -117,7 +117,7 @@
 			</div>
 			<div class="relative">
 				<img class="ana" src="images/穴.png">
-				<img class="mogura uwagaki"  src="">
+				<img class="mogura uwaga"  src="">
 
 				<div class="start">
 					<button onclick="gamestart()"> Game Start </button>
@@ -133,15 +133,46 @@
 		//すべてのもぐらにクリックイベントを登録
 		var moguras = document.querySelectorAll(".mogura");
 		let count = 0;
-		for(let index=0;index < moguras.length;index++){
-			const element = moguras[index];
-			element.onclick = hitmogura;
 
+		for(let index=0;index < moguras.length;index++){
+			new moguraObj(moguras[index]);
+			new gurasanObj(moguras[index]);
+			new gobuObj(moguras[index]);
+		}
+	
+		// ここにJavaScriptを書く
+
+		function moguraObj(image){
+			const HIT_MOGURA = "image/モグ1.png";
+			const NORMAL_MOGURA = "image/モグ2.png";
+
+			const HIT_GURASAN = "image/モグ4.png";
+			const NORMAL_GURASAN = "image/モグ3.png";
+
+			const HIT_GOBU = "image/ゴブ2.png";
+			const NORMAL_GOBU = "image/ゴブ1.png";
+
+			const STATUS = {
+				HIDE: 0,
+				SHOW: 1,
+				PRESS:2
+			}
+
+			image.status = STATUS.HIDE;
+
+			image.onclick = function(){
+
+			}
+
+			image.hideMogura = function(){
+				image.status = STATUS.HIDE;
+				this.src = "";
+			}
 
 		}
-		
 
-		// ここにJavaScriptを書く
+
+
 		function hitmogura(){
 			 var mogura = event.target;
 			console.log('たたいたよ');
@@ -159,8 +190,8 @@
 		function gamestart(){
 			let time;
 			time = setInterval(derumogura, 1000);
-			setTimeout(clearInterval,3000,time);
-			setTimeout(owari,3000);
+			setTimeout(clearInterval,30000,time);
+			setTimeout(owari,30000);
 
 		}
 
@@ -181,7 +212,7 @@
 			//clearInterval(derumogura)
 			count=0;
 		}
-
+	
 
 
 	</script>
