@@ -71,6 +71,7 @@
 		.field {
 			margin: 40px;
 		}
+				
 	</style>
 
 </head>
@@ -117,102 +118,99 @@
 			</div>
 			<div class="relative">
 				<img class="ana" src="images/穴.png">
-				<img class="mogura uwaga"  src="">
+				<img class="mogura uwagaki"  src="">
 
-				<div class="start">
-					<button onclick="gamestart()"> Game Start </button>
-				</div>
+
+			</div>
+			<div class="start">
+				<button onclick="gamestart()"> Game Start </button>
 			</div>
 		</div>
 	</div>
 
 	<script>
 
-
-		
-		//すべてのもぐらにクリックイベントを登録
-		var moguras = document.querySelectorAll(".mogura");
-		let count = 0;
-
-		for(let index=0;index < moguras.length;index++){
+		// 全てのもぐらに、クリックイベントを登録する
+		const moguras = document.querySelectorAll(".mogura");
+		var score = 0;
+		console.log(moguras[0] + "here");
+		for (let index = 0; index < moguras.length; index++) {
 			new moguraObj(moguras[index]);
-			new gurasanObj(moguras[index]);
-			new gobuObj(moguras[index]);
+
 		}
-	
-		// ここにJavaScriptを書く
 
-		function moguraObj(image){
-			const HIT_MOGURA = "image/モグ1.png";
-			const NORMAL_MOGURA = "image/モグ2.png";
 
-			const HIT_GURASAN = "image/モグ4.png";
-			const NORMAL_GURASAN = "image/モグ3.png";
+		function gamestart() {
+			let interval = setInterval(() => {
+				let random = Math.floor(Math.random() * 9);
+				moguras[random].showMogura();
+			}, 300);
 
-			const HIT_GOBU = "image/ゴブ2.png";
-			const NORMAL_GOBU = "image/ゴブ1.png";
+			setTimeout(() => {
+				clearTimeout(interval);
+				alert("ゲーム終了 スコア:" + score);
+			}, 30000);
+		}
 
+		function moguraObj(image) {
+			console.log("ここ" + image);
+			const HIT_MOGURA = "images/モグ1.png";
+			const NORMAL_MOGURA = "images/モグ2.png";
+			const GURASAN_MOGURA = "images/モグ3.png";
+			const GURASAN_MOGURA2 = "images/モグ4.png";
+			const gobu_MOGURA = "images/ゴブ1.png";
+			const gobu_MOGURA2 = "images/ゴブ2.png";
 			const STATUS = {
 				HIDE: 0,
 				SHOW: 1,
-				PRESS:2
+				PRESS: 2
 			}
-
 			image.status = STATUS.HIDE;
+			console.log("soko" + image);
 
-			image.onclick = function(){
+			image.onclick = function () {
+				score++;
+				image.status = STATUS.PRESS;
+				if(this.src === NORMAL_MOGURA){
+				this.src = HIT_MOGURA;
+					}
+			else if(this.src === GURASAN_MOGURA){
+					this.src = GUASAN_MOGURA2;
+					}
+			else if(this.src === gobu_MOGURA){
+					this.src = gobu_MOGURA2;
+					}
+				clearTimeout(this.autoHide)
+				setTimeout((image) => { image.hideMogura() }, 500, this);
+	
+				}
+			
 
+
+			console.log("doこ" + image);
+
+			image.showMogura = function () {
+			if (image.status != STATUS.HIDE) {
+				return false;
 			}
-
-			image.hideMogura = function(){
+			image.status = STATUS.SHOW;
+				let rnd = Math.floor(Math.random()*100);
+				console.log(rnd);
+				if(rnd>20){
+					this.src = NORMAL_MOGURA;}
+				else if(rnd>5){
+					this.src = GURASAN_MOGURA;
+				}
+				else{this.src = gobu_MOGURA};
+				this.autoHide = setTimeout((image) => { image.hideMogura() }, 500 + 2000 * Math.random(), this);
+				return true;
+			}
+		
+			image.hideMogura = function () {
 				image.status = STATUS.HIDE;
 				this.src = "";
 			}
-
 		}
-
-
-
-		function hitmogura(){
-			 var mogura = event.target;
-			console.log('たたいたよ');
-			mogura.src="images/モグ1.png";
-			setTimeout(modoru,300, mogura)
-			count++;
-		}
-
-		function modoru(mogura){
-			mogura.src="images/モグ2.png";
-			setTimeout(kakurerumogura,1000,mogura);
-		}
-
-		
-		function gamestart(){
-			let time;
-			time = setInterval(derumogura, 1000);
-			setTimeout(clearInterval,30000,time);
-			setTimeout(owari,30000);
-
-		}
-
-
-		function derumogura(){
-			let rnd = Math.floor(Math.random() * 9);
-			modoru(moguras[rnd]);
-
-		}
-
-		function kakurerumogura(mogura){
-			mogura.src="";
-		}
-
-		function owari(){
-
-			alert("ゲーム終了！\n"+count+"回たたきました");
-			//clearInterval(derumogura)
-			count=0;
-		}
-	
 
 
 	</script>
