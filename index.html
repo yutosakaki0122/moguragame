@@ -160,25 +160,35 @@
 			const GURASAN_MOGURA2 = "images/モグ4.png";
 			const gobu_MOGURA = "images/ゴブ1.png";
 			const gobu_MOGURA2 = "images/ゴブ2.png";
+			let mogura_status = 0;
 			const STATUS = {
 				HIDE: 0,
 				SHOW: 1,
 				PRESS: 2
 			}
 			image.status = STATUS.HIDE;
-			console.log("soko" + image);
+			console.log("soko" + image.src);
 
 			image.onclick = function () {
-				score++;
+				
+				console.log(image.src)
 				image.status = STATUS.PRESS;
-				if(this.src === NORMAL_MOGURA){
-				this.src = HIT_MOGURA;
+
+				if(mogura_status===1){
+				image.src = HIT_MOGURA;
+				score++;
+				console.log(score);
+				//console.log(image.src);
 					}
-			else if(this.src === GURASAN_MOGURA){
-					this.src = GUASAN_MOGURA2;
+			else if(mogura_status ===2){
+					this.src = GURASAN_MOGURA2;
+					score += 2;
+					console.log(score);
 					}
-			else if(this.src === gobu_MOGURA){
+			else if(mogura_status === 3){
 					this.src = gobu_MOGURA2;
+					score += 5;
+					console.log(score);
 					}
 				clearTimeout(this.autoHide)
 				setTimeout((image) => { image.hideMogura() }, 500, this);
@@ -187,7 +197,7 @@
 			
 
 
-			console.log("doこ" + image);
+			//console.log("doこ" + image);
 
 			image.showMogura = function () {
 			if (image.status != STATUS.HIDE) {
@@ -195,14 +205,18 @@
 			}
 			image.status = STATUS.SHOW;
 				let rnd = Math.floor(Math.random()*100);
-				console.log(rnd);
+				//console.log(rnd);
 				if(rnd>20){
-					this.src = NORMAL_MOGURA;}
-				else if(rnd>5){
-					this.src = GURASAN_MOGURA;
+					image.src = NORMAL_MOGURA;
+					mogura_status = 1;
 				}
-				else{this.src = gobu_MOGURA};
-				this.autoHide = setTimeout((image) => { image.hideMogura() }, 500 + 2000 * Math.random(), this);
+				else if(rnd>5){
+					image.src = GURASAN_MOGURA;
+					mogura_status = 2;
+				}
+				else{image.src = gobu_MOGURA;
+					mogura_status = 3;};
+				image.autoHide = setTimeout((image) => { image.hideMogura() }, 500 + 2000 * Math.random(), this);
 				return true;
 			}
 		
